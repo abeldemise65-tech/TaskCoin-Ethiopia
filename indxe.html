@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethiopia TaskCoin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0b0b;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+    }
+
+    /* AUTH */
+    #authPage {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .auth-box {
+      width: 100%;
+      max-width: 420px;
+      background: #151515;
+      padding: 30px 22px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,.5);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .auth-box h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background: #0e0e0e;
+      color: white;
+      outline: none;
+    }
+
+    .main-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      background: #1677ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 18px;
+      color: #aaa;
+    }
+
+    .switch span {
+      color: #1683ff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #message {
+      margin-top: 12px;
+      text-align: center;
+      color: #ff6464;
+      font-size: 14px;
+    }
+
+    /* APP */
+    #appPage {
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    header {
+      padding: 20px;
+      background: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h2 {
+      font-size: 20px;
+    }
+
+    .logout {
+      background: #222;
+      color: #ff5d5d;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    /* BALANCE */
+    .balance-card {
+      background: linear-gradient(135deg, #125cff, #7337ff);
+      padding: 25px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .balance-card small {
+      color: #ddd;
+    }
+
+    .balance {
+      font-size: 38px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .birr {
+      margin-top: 5px;
+      color: #ddd;
+    }
+
+    /* QUICK */
+    .quick {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .quick button {
+      background: #171717;
+      color: white;
+      padding: 15px 5px;
+      border-radius: 12px;
+    }
+
+    /* SECTIONS */
+    .section {
+      margin-top: 20px;
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+    }
+
+    .task {
+      background: #151515;
+      padding: 18px;
+      border-radius: 15px;
+      margin-bottom: 12px;
+      border: 1px solid #242424;
+    }
+
+    .task h3 {
+      margin-bottom: 7px;
+    }
+
+    .task p {
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+
+    .task button {
+      background: #1683ff;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .wallet-card,
+    .withdraw-card {
+      background: #151515;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    .withdraw-card h3 {
+      margin-bottom: 15px;
+    }
+
+    /* NAV */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: #111;
+      border-top: 1px solid #252525;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .bottom-nav button {
+      background: none;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .bottom-nav button.active {
+      color: #1683ff;
+    }
+
+    .bottom-nav div {
+      font-size: 22px;
+      margin-bottom: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= AUTH PAGE ================= -->
+
+<div id="authPage">
+
+  <div class="auth-box">
+
+    <div class="logo">🪙</div>
+
+    <h1>Ethiopia TaskCoin</h1>
+
+    <p class="subtitle">
+      Earn • Complete • Withdraw
+    </p>
+
+    <!-- LOGIN -->
+
+    <div id="loginBox">
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+      >
+
+      <button class="main-btn" onclick="login()">
+        Login
+      </button>
+
+      <p class="switch">
+        Don't have an account?
+        <span onclick="showRegister()">Create Account</span>
+      </p>
+
+    </div>
+
+    <!-- REGISTER -->
+
+    <div id="registerBox" class="hidden">
+
+      <input
+        type="text"
+        id="registerName"
+        placeholder="Full Name"
+      >
+
+      <input
+        type="email"
+        id="registerEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="registerPassword"
+        placeholder="Password"
+      >
+
+      <button class="main-btn" onclick="register()">
+        Create Account
+      </button>
+
+      <p class="switch">
+        Already have an account?
+        <span onclick="showLogin()">Login</span>
+      </p>
+
+    </div>
+
+    <div id="message"></div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= APP PAGE ================= -->
+
+<div id="appPage" class="hidden">
+
+  <header>
+
+    <h2>🪙 Ethiopia TaskCoin</h2>
+
+    <button class="logout" onclick="logout()">
+      Logout
+    </button>
+
+  </header>
+
+
+  <div class="container">
+
+    <!-- HOME -->
+
+    <section id="homeSection" class="section">
+
+      <div class="balance-card">
+
+        <small>Your Balance</small>
+
+        <div class="balance">
+          <span id="coinBalance">0</span> TC
+        </div>
+
+        <div class="birr">
+          ≈ <span id="birrBalance">0</span> Birr
+        </div>
+
+      </div>
+
+
+      <div class="quick">
+
+        <button onclick="showSection('tasksSection')">
+          <div>🎯</div>
+          Tasks
+        </button>
+
+        <button onclick="showSection('walletSection')">
+          <div>💰</div>
+          Wallet
+        </button>
+
+        <button onclick="showSection('withdrawSection')">
+          <div>💸</div>
+          Withdraw
+        </button>
+
+      </div>
+
+
+      <div class="wallet-card">
+
+        <h3>👋 Welcome to Ethiopia TaskCoin</h3>
+
+        <p style="color:#aaa;margin-top:8px;">
+          Complete available tasks and earn TaskCoin.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- TASKS -->
+
+    <section id="tasksSection" class="section hidden">
+
+      <h2>🎯 Available Tasks</h2>
+
+      <div class="task">
+
+        <h3>Task 1</h3>
+
+        <p>
+          Complete this simple task and earn 100 TC.
+        </p>
+
+        <button onclick="completeTask(100, this)">
+          Complete +100 TC
+        </button>
+
+      </div>
+
+
+      <div class="task">
+
+        <h3>Task 2</h3>
+
+        <p>
+          Complete this task and earn 200 TC.
+        </p>
+
+        <button onclick="completeTask(200, this)">
+          Complete +200 TC
+        </button>
+
+      </div>
+
+
+      <div class="task">
+
+        <h3>Task 3</h3>
+
+        <p>
+          Complete this task and earn 500 TC.
+        </p>
+
+        <button onclick="completeTask(500, this)">
+          Complete +500 TC
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- WALLET -->
+
+    <section id="walletSection" class="section hidden">
+
+      <h2>💰 Wallet</h2>
+
+      <div class="wallet-card">
+
+        <p style="color:#aaa;">
+          TaskCoin Balance
+        </p>
+
+        <h1 style="margin-top:10px;">
+          <span id="walletCoins">0</span> TC
+        </h1>
+
+        <p style="margin-top:8px;color:#aaa;">
+          ≈ <span id="walletBirr">0</span> Birr
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- WITHDRAW -->
+
+    <section id="withdrawSection" class="section hidden">
+
+      <h2>💸 Withdraw</h2>
+
+      <div class="withdraw-card">
+
+        <h3>Withdraw your TaskCoin</h3>
+
+        <input
+          type="number"
+          id="withdrawAmount"
+          placeholder="TaskCoin amount"
+        >
+
+        <select id="withdrawMethod">
+
+          <option value="Telebirr">
+            Telebirr
+          </option>
+
+          <option value="Bank">
+            Bank
+          </option>
+
+        </select>
+
+        <input
+          type="text"
+          id="withdrawAccount"
+          placeholder="Phone number / Account number"
+        >
+
+        <button class="main-btn" onclick="withdraw()">
+          Request Withdrawal
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- BOTTOM NAV -->
+
+  <div class="bottom-nav">
+
+    <button onclick="showSection('homeSection')">
+      <div>🏠</div>
+      Home
+    </button>
+
+    <button onclick="showSection('tasksSection')">
+      <div>🎯</div>
+      Tasks
+    </button>
+
+    <button onclick="showSection('walletSection')">
+      <div>💰</div>
+      Wallet
+    </button>
+
+    <button onclick="showSection('withdrawSection')">
+      <div>💸</div>
+      Withdraw
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= FIREBASE ================= -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+
+<script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCMa8PltC1GF_fn8VWV2w8Un-7zzRzpZOc",
+  authDomain: "taskcoin-ethiopia.firebaseapp.com",
+  projectId: "taskcoin-ethiopia",
+  storageBucket: "taskcoin-ethiopia.firebasestorage.app",
+  messagingSenderId: "371761604216",
+  appId: "1:371761604216:web:18609aa65ec95f5800ef8d",
+  measurementId: "G-7133MYN4HV"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+let currentUser = null;
+
+let currentCoins = 0;
+
+
+/* ================= AUTH STATE ================= */
+
+auth.onAuthStateChanged(async (user) => {
+
+  if (user) {
+
+    currentUser = user;
+
+    document
+      .getElementById("authPage")
+      .classList.add("hidden");
+
+    document
+      .getElementById("appPage")
+      .classList.remove("hidden");
+
+    await loadUser();
+
+  } else {
+
+    currentUser = null;
+
+    document
+      .getElementById("authPage")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("appPage")
+      .classList.add("hidden");
+
+  }
+
+});
+
+
+/* ================= REGISTER ================= */
+
+async function register() {
+
+  clearMessage();
+
+  const name =
+    document.getElementById("registerName").value.trim();
+
+  const email =
+    document.getElementById("registerEmail").value.trim();
+
+  const password =
+    document.getElementById("registerPassword").value;
+
+  if (!name || !email || !password) {
+
+    showMessage("Please fill all fields.");
+
+    return;
+  }
+
+  if (password.length < 6) {
+
+    showMessage("Password must be at least 6 characters.");
+
+    return;
+  }
+
+  try {
+
+    const result =
+      await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+    const user = result.user;
+
+    await db.collection("users")
+      .doc(user.uid)
+      .set({
+
+        name: name,
+
+        email: email,
+
+        coins: 0,
+
+        createdAt:
+          firebase.firestore.FieldValue.serverTimestamp()
+
+      });
+
+    showMessage("Account created successfully.", true);
+
+  } catch (error) {
+
+    showMessage(getFirebaseError(error));
+
+  }
+
+}
+
+
+/* ================= LOGIN ================= */
+
+async function login() {
+
+  clearMessage();
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  if (!email || !password) {
+
+    showMessage("Please enter email and password.");
+
+    return;
+  }
+
+  try {
+
+    await auth.signInWithEmailAndPassword(
+      email,
+      password
+    );
+
+  } catch (error) {
+
+    showMessage(getFirebaseError(error));
+
+  }
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+async function logout() {
+
+  await auth.signOut();
+
+}
+
+
+/* ================= LOAD USER ================= */
+
+async function loadUser() {
+
+  if (!currentUser) return;
+
+  try {
+
+    const doc =
+      await db.collection("users")
+      .doc(currentUser.uid)
+      .get();
+
+    if (doc.exists) {
+
+      const data = doc.data();
+
+      currentCoins =
+        Number(data.coins || 0);
+
+      updateBalance();
+
+    } else {
+
+      await db.collection("users")
+        .doc(currentUser.uid)
+        .set({
+
+          email: currentUser.email,
+
+          coins: 0,
+
+          createdAt:
+            firebase.firestore.FieldValue.serverTimestamp()
+
+        });
+
+      currentCoins = 0;
+
+      updateBalance();
+
+    }
+
+  } catch (error) {
+
+    showMessage(getFirebaseError(error));
+
+  }
+
+}
+
+
+/* ================= UPDATE BALANCE ================= */
+
+function updateBalance() {
+
+  document.getElementById("coinBalance")
+    .textContent = currentCoins;
+
+  document.getElementById("walletCoins")
+    .textContent = currentCoins;
+
+  const birr =
+    currentCoins / 100;
+
+  document.getElementById("birrBalance")
+    .textContent = birr.toFixed(2);
+
+  document.getElementById("walletBirr")
+    .textContent = birr.toFixed(2);
+
+}
+
+
+/* ================= COMPLETE TASK ================= */
+
+async function completeTask(reward, button) {
+
+  if (!currentUser) {
+
+    showMessage("Please login first.");
+
+    return;
+  }
+
+  button.disabled = true;
+
+  button.textContent = "Processing...";
+
+  try {
+
+    const userRef =
+      db.collection("users")
+      .doc(currentUser.uid);
+
+    const newBalance =
+      currentCoins + Number(reward);
+
+    await userRef.update({
+
+      coins: newBalance
+
+    });
+
+    currentCoins = newBalance;
+
+    updateBalance();
+
+    button.textContent = "Completed ✓";
+
+    button.style.background = "#168a45";
+
+  } catch (error) {
+
+    button.disabled = false;
+
+    button.textContent =
+      "Try Again";
+
+    showMessage(getFirebaseError(error));
+
+  }
+
+}
+
+
+/* ================= SHOW SECTION ================= */
+
+function showSection(sectionId) {
+
+  const sections = [
+
+    "homeSection",
+
+    "tasksSection",
+
+    "walletSection",
+
+    "withdrawSection"
+
+  ];
+
+  sections.forEach(id => {
+
+    document
+      .getElementById(id)
+      .classList.add("hidden");
+
+  });
+
+  document
+    .getElementById(sectionId)
+    .classList.remove("hidden");
+
+}
+
+
+/* ================= WITHDRAW ================= */
+
+async function withdraw() {
+
+  if (!currentUser) {
+
+    showMessage("Please login first.");
+
+    return;
+  }
+
+  const amount =
+    Number(
+      document.getElementById("withdrawAmount").value
+    );
+
+  const method =
+    document.getElementById("withdrawMethod").value;
+
+  const account =
+    document.getElementById("withdrawAccount").value.trim();
+
+  if (!amount || amount <= 0) {
+
+    showMessage("Enter a valid amount.");
+
+    return;
+  }
+
+  if (amount > currentCoins) {
+
+    showMessage("Insufficient TaskCoin balance.");
+
+    return;
+  }
+
+  if (!account) {
+
+    showMessage("Enter your account number.");
+
+    return;
+  }
+
+  try {
+
+    const newBalance =
+      currentCoins - amount;
+
+    await db.collection("users")
+      .doc(currentUser.uid)
+      .update({
+
+        coins: newBalance
+
+      });
+
+    await db.collection("withdrawals")
+      .add({
+
+        userId: currentUser.uid,
+
+        email: currentUser.email,
+
+        amountTC: amount,
+
+        amountBirr: amount / 100,
+
+        method: method,
+
+        account: account,
+
+        status: "pending",
+
+        createdAt:
+          firebase.firestore.FieldValue.serverTimestamp()
+
+      });
+
+    currentCoins = newBalance;
+
+    updateBalance();
+
+    document.getElementById("withdrawAmount").value = "";
+
+    document.getElementById("withdrawAccount").value = "";
+
+    showMessage(
+      "Withdrawal request submitted.",
+      true
+    );
+
+  } catch (error) {
+
+    showMessage(getFirebaseError(error));
+
+  }
+
+}
+
+
+/* ================= AUTH UI ================= */
+
+function showRegister() {
+
+  document
+    .getElementById("loginBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("registerBox")
+    .classList.remove("hidden");
+
+  clearMessage();
+
+}
+
+
+function showLogin() {
+
+  document
+    .getElementById("registerBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginBox")
+    .classList.remove("hidden");
+
+  clearMessage();
+
+}
+
+
+/* ================= MESSAGE ================= */
+
+function showMessage(message, success = false) {
+
+  const element =
+    document.getElementById("message");
+
+  element.textContent = message;
+
+  element.style.color =
+    success ? "#37d67a" : "#ff6464";
+
+}
+
+
+function clearMessage() {
+
+  document
+    .getElementById("message")
+    .textContent = "";
+
+}
+
+
+/* ================= FIREBASE ERRORS ================= */
+
+function getFirebaseError(error) {
+
+  switch (error.code) {
+
+    case "auth/email-already-in-use":
+      return "This email is already registered.";
+
+    case "auth/invalid-email":
+      return "Invalid email address.";
+
+    case "auth/weak-password":
+      return "Password is too weak.";
+
+    case "auth/invalid-credential":
+      return "Wrong email or password.";
+
+    case "auth/user-not-found":
+      return "User not found.";
+
+    case "auth/wrong-password":
+      return "Wrong password.";
+
+    case "auth/operation-not-allowed":
+      return "Email/Password login is not enabled in Firebase.";
+
+    case "auth/network-request-failed":
+      return "Network error. Check your internet.";
+
+    case "permission-denied":
+      return "Firebase permission denied. Check Firestore rules.";
+
+    default:
+      return error.message || "Something went wrong.";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
