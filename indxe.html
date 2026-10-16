@@ -319,4 +319,89 @@
       <h3 id="profileName">TaskCoin User</h3>
       <p>ወደ TaskCoin Ethiopia እንኳን በደህና መጣህ!</p>
       <div class="profile-row">Platform: <strong>Telegram Mini App</strong></div>
-      <div class="profile-row">Account: <strong id="profileStatus">Demo</
+      <div class="profile-row">Account: <strong id="profileStatus">Demo</strong></div>
+      <div class="profile-row">Balance: <strong><span id="profileBalance">0</span> TC</strong></div>
+    </div>
+    <p class="notice">የመለያ መረጃና የሂሳብ ማስቀመጫ ከዚያ በኋላ ከFirebase ጋር ይገናኛሉ።</p>
+  </section>
+
+  <section id="auth" class="page">
+    <h2 class="section-title">🔐 Login / Register</h2>
+    <div class="card">
+      <p>የመለያ ስርዓት ከFirebase ጋር ከመገናኘቱ በፊት ይህ ገጽ የማሳያ ብቻ ነው።</p>
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="your@email.com">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="ቢያንስ 6 ቁምፊ">
+      <button class="btn primary full" onclick="alert('Firebase Login/Register በሚቀጥለው ደረጃ እንገናኛለን።')">Continue</button>
+    </div>
+  </section>
+
+  <p class="notice">TaskCoin Ethiopia © 2026 · የሙከራ ሥሪት</p>
+</div>
+
+<nav class="nav">
+  <button class="active" data-page="home" onclick="showPage('home',this)"><span>🏠</span>Home</button>
+  <button data-page="tasks" onclick="showPage('tasks',this)"><span>📋</span>Tasks</button>
+  <button data-page="invite" onclick="showPage('invite',this)"><span>👥</span>Invite</button>
+  <button data-page="wallet" onclick="showPage('wallet',this)"><span>💰</span>Wallet</button>
+  <button data-page="profile" onclick="showPage('profile',this)"><span>👤</span>Profile</button>
+</nav>
+
+<script>
+  const tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    tg.ready();
+    tg.expand();
+  }
+
+  function showPage(id, button) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById(id);
+    if (page) page.classList.add('active');
+
+    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+    const navButton = button || document.querySelector('.nav button[data-page="' + id + '"]');
+    if (navButton) navButton.classList.add('active');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function demoTask() {
+    alert('ይህ የሙከራ Task ነው። እውነተኛ ሽልማት ገና አልተነቃም።');
+  }
+
+  async function copyInvite() {
+    const field = document.getElementById('inviteLink');
+    const message = document.getElementById('inviteMessage');
+    try {
+      await navigator.clipboard.writeText(field.value);
+      message.textContent = 'ሊንኩ ተኮፒ ተደርጓል።';
+    } catch (e) {
+      field.select();
+      message.textContent = 'ሊንኩን ምረጥና Copy አድርግ።';
+    }
+  }
+
+  function setTelegramProfile() {
+    if (!tg || !tg.initDataUnsafe || !tg.initDataUnsafe.user) return;
+
+    const user = tg.initDataUnsafe.user;
+    const name = [user.first_name, user.last_name].filter(Boolean).join(' ');
+    document.getElementById('profileName').textContent = name || 'TaskCoin User';
+    document.getElementById('profileStatus').textContent = 'Telegram connected';
+
+    if (user.username) {
+      const botUsername = 'taskcoin_ethiopia_bot';
+      const link = 'https://t.me/' + botUsername + '?start=' + user.id;
+      document.getElementById('inviteLink').value = link;
+    } else {
+      document.getElementById('inviteLink').value =
+        'https://t.me/taskcoin_ethiopia_bot/TaskCoinEthiopia';
+    }
+  }
+
+  setTelegramProfile();
+</script>
+</body>
+</html>
