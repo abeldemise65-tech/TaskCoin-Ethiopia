@@ -1,346 +1,151 @@
-# TaskCoin-Ethiopia
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="am">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080d0a">
-  <title>TaskCoin Ethiopia</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    :root {
-      --bg: #080d0a;
-      --card: #121a14;
-      --green: #b7ff4a;
-      --text: #f5f7f2;
-      --muted: #9aa79c;
-      --border: #27342a;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, sans-serif;
-    }
-
-    button, input { font: inherit; }
-    button { cursor: pointer; }
-
-    .app {
-      max-width: 520px;
-      min-height: 100vh;
-      margin: auto;
-      padding: 20px 16px 100px;
-    }
-
-    .top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
-
-    .brand {
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .brand span { color: var(--green); }
-
-    .badge {
-      color: var(--green);
-      border: 1px solid var(--border);
-      padding: 7px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-    }
-
-    .hero {
-      padding: 24px;
-      border-radius: 24px;
-      background: linear-gradient(140deg, #1d3020, #111812 75%);
-      border: 1px solid #30472d;
-      margin-bottom: 22px;
-    }
-
-    .label { color: var(--muted); font-size: 14px; }
-
-    .balance {
-      font-size: 38px;
-      font-weight: 800;
-      margin: 12px 0;
-    }
-
-    .balance small {
-      font-size: 15px;
-      color: var(--green);
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 12px;
-      padding: 13px 16px;
-      font-weight: 700;
-    }
-
-    .primary {
-      background: var(--green);
-      color: #10170b;
-    }
-
-    .secondary {
-      background: #202c22;
-      color: white;
-      border: 1px solid var(--border);
-    }
-
-    .full { width: 100%; }
-
-    .section-title {
-      font-size: 18px;
-      margin: 24px 0 14px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 17px;
-      border-radius: 17px;
-    }
-
-    .icon { font-size: 26px; margin-bottom: 10px; }
-    .card h3 { margin: 0 0 7px; font-size: 15px; }
-    .card p { color: var(--muted); font-size: 12px; line-height: 1.5; }
-
-    .task {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .task .info { flex: 1; }
-    .task h3 { font-size: 14px; margin: 0 0 6px; }
-    .task p { margin: 0; }
-
-    .reward {
-      color: var(--green);
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-
-    .page { display: none; }
-    .page.active { display: block; }
-
-    .nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 520px;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      background: #101711;
-      border-top: 1px solid var(--border);
-      padding: 10px 4px calc(10px + env(safe-area-inset-bottom));
-      z-index: 5;
-    }
-
-    .nav button {
-      color: var(--muted);
-      background: none;
-      border: 0;
-      padding: 5px 0;
-      font-size: 11px;
-    }
-
-    .nav button span {
-      display: block;
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-
-    .nav button.active { color: var(--green); }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      background: #0b110d;
-      color: white;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin: 8px 0 14px;
-      outline: none;
-    }
-
-    .notice {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-      margin-top: 18px;
-    }
-
-    .profile-row {
-      padding: 15px 0;
-      border-bottom: 1px solid var(--border);
-      color: var(--muted);
-    }
-
-    .profile-row strong { color: white; }
-
-    .hidden { display: none !important; }
-
-    @media (max-width: 360px) {
-      .balance { font-size: 30px; }
-      .hero { padding: 18px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d0a">
+<title>TaskCoin Ethiopia</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:#080d0a;--card:#121a14;--green:#b7ff4a;--text:#f5f7f2;--muted:#9aa79c;--border:#27342a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{max-width:520px;min-height:100vh;margin:auto;padding:22px 16px 100px}
+.brand{font-size:23px;font-weight:800;margin-bottom:26px}
+.brand span{color:var(--green)}
+.page{display:none}
+.page.active{display:block}
+.card{background:var(--card);border:1px solid var(--border);padding:18px;border-radius:18px;margin-bottom:14px}
+h2{font-size:23px;margin:8px 0}
+p,.muted{color:var(--muted);font-size:14px;line-height:1.6}
+input{width:100%;padding:14px;background:#0b110d;color:white;border:1px solid var(--border);border-radius:12px;margin:8px 0 14px}
+.btn{border:0;border-radius:12px;padding:13px 16px;font-weight:bold}
+.primary{background:var(--green);color:#10170b}
+.secondary{background:#202c22;color:white;border:1px solid var(--border)}
+.full{width:100%}
+.link{color:var(--green);background:none;border:0;padding:12px 0}
+.hero{padding:22px;border-radius:22px;background:linear-gradient(140deg,#1d3020,#111812);border:1px solid #30472d;margin-bottom:22px}
+.balance{font-size:36px;font-weight:800;margin:12px 0}
+.balance small{font-size:14px;color:var(--green)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.item{background:var(--card);padding:17px;border:1px solid var(--border);border-radius:16px;cursor:pointer}
+.item b{display:block;margin:8px 0}
+.icon{font-size:25px}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;display:none;grid-template-columns:repeat(5,1fr);background:#101711;border-top:1px solid var(--border);padding:10px 3px calc(10px + env(safe-area-inset-bottom));z-index:5}
+.nav button{background:none;border:0;color:var(--muted);font-size:11px}
+.nav button span{display:block;font-size:20px;margin-bottom:4px}
+.nav button.active{color:var(--green)}
+.notice{font-size:12px;color:var(--muted);line-height:1.6}
+.task{display:flex;align-items:center;gap:12px}
+.task .details{flex:1}
+.error{color:#ff9d9d;font-size:13px}
+.hidden{display:none!important}
+</style>
 </head>
 <body>
 <div class="app">
-  <header class="top">
-    <div class="brand">TaskCoin <span>Ethiopia</span></div>
-    <div class="badge">🇪🇹 ETHIOPIA</div>
-  </header>
+  <div class="brand">TaskCoin <span>Ethiopia 🇪🇹</span></div>
 
-  <section id="home" class="page active">
+  <!-- LOGIN / REGISTER -->
+  <section id="auth" class="page active">
+    <div class="card">
+      <h2 id="authTitle">እንኳን ወደ TaskCoin በደህና መጣህ!</h2>
+      <p id="authDescription">ግባ ወይም አዲስ መለያ ፍጠር።</p>
+
+      <div id="nameWrap" class="hidden">
+        <label for="name">ሙሉ ስም</label>
+        <input id="name" autocomplete="name" placeholder="ስምህን አስገባ">
+      </div>
+
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" placeholder="name@example.com">
+
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" placeholder="ቢያንስ 6 ቁምፊ">
+
+      <p id="authError" class="error"></p>
+      <button id="submitBtn" class="btn primary full" onclick="submitAuth()">Login</button>
+      <button id="switchBtn" class="link full" onclick="switchAuth()">አካውንት የለህም? Register</button>
+      <p class="notice">የመለያ መረጃህ በFirebase Authentication ይጠበቃል። የሚያስፈልግ የይለፍ ቃልህን ለማንም አትስጥ።</p>
+    </div>
+  </section>
+
+  <!-- HOME -->
+  <section id="home" class="page">
     <div class="hero">
-      <div class="label">የእኔ የCoin ሂሳብ</div>
+      <p>እንኳን ደህና መጣህ፣ <b id="welcomeName">User</b>!</p>
+      <div class="muted">የእኔ የCoin ሂሳብ</div>
       <div class="balance"><span id="balance">0</span> <small>TC</small></div>
-      <p>ተግባሮችን ተመልከት፣ ተማር፣ ሂሳብህንም ተከታተል።</p>
       <button class="btn primary" onclick="showPage('tasks')">Tasks ጀምር →</button>
     </div>
-
-    <h2 class="section-title">ፈጣን መዳረሻ</h2>
+    <h2>ፈጣን መዳረሻ</h2>
     <div class="grid">
-      <div class="card" onclick="showPage('tasks')">
-        <div class="icon">📋</div>
-        <h3>Tasks</h3>
-        <p>የሚገኙ ተግባሮችን ተመልከት።</p>
-      </div>
-      <div class="card" onclick="showPage('invite')">
-        <div class="icon">👥</div>
-        <h3>Invite Friends</h3>
-        <p>ጓደኞችህን ወደ አፑ ጋብዝ።</p>
-      </div>
-      <div class="card" onclick="showPage('wallet')">
-        <div class="icon">💰</div>
-        <h3>Wallet</h3>
-        <p>የሂሳብ መረጃህን ተመልከት።</p>
-      </div>
-      <div class="card" onclick="showPage('profile')">
-        <div class="icon">👤</div>
-        <h3>Profile</h3>
-        <p>የመለያህን መረጃ ተመልከት።</p>
-      </div>
+      <div class="item" onclick="showPage('tasks')"><span class="icon">📋</span><b>Tasks</b><p>ተግባሮችን ተመልከት።</p></div>
+      <div class="item" onclick="showPage('invite')"><span class="icon">👥</span><b>Invite</b><p>ጓደኞችህን ጋብዝ።</p></div>
+      <div class="item" onclick="showPage('wallet')"><span class="icon">💰</span><b>Wallet</b><p>የCoin ሂሳብህን ተመልከት።</p></div>
+      <div class="item" onclick="showPage('profile')"><span class="icon">👤</span><b>Profile</b><p>የመለያ መረጃ።</p></div>
     </div>
   </section>
 
+  <!-- TASKS -->
   <section id="tasks" class="page">
-    <h2 class="section-title">📋 የሚገኙ Tasks</h2>
-
+    <h2>📋 Tasks</h2>
     <div class="card task">
       <div class="icon">📱</div>
-      <div class="info">
-        <h3>አፑን ተመልከት</h3>
-        <p>የአፑን ገጾች ተማር።</p>
-      </div>
-      <button class="btn secondary" onclick="demoTask()">Open</button>
+      <div class="details"><b>አፑን ተመልከት</b><p>የሙከራ ተግባር ነው።</p></div>
+      <span class="muted">Demo</span>
     </div>
-
-    <div class="card task">
-      <div class="icon">📢</div>
-      <div class="info">
-        <h3>የማስታወቂያ Task</h3>
-        <p>በቅርቡ ይጨመራል።</p>
-      </div>
-      <span class="badge">Soon</span>
-    </div>
-
     <div class="card task">
       <div class="icon">🎬</div>
-      <div class="info">
-        <h3>የቪዲዮ Task</h3>
-        <p>በቅርቡ ይጨመራል።</p>
-      </div>
-      <span class="badge">Soon</span>
+      <div class="details"><b>Video Task</b><p>በቅርቡ ይጨመራል።</p></div>
+      <span class="muted">Soon</span>
     </div>
-
-    <p class="notice">ማስታወሻ፦ እነዚህ የሙከራ ምሳሌዎች ናቸው። እውነተኛ የሽልማት Tasks እስካሁን አልተገናኙም።</p>
+    <p class="notice">እውነተኛ Tasks እና ሽልማቶች ገና አልተገናኙም።</p>
   </section>
 
+  <!-- INVITE -->
   <section id="invite" class="page">
-    <h2 class="section-title">👥 ጓደኞችህን ጋብዝ</h2>
+    <h2>👥 Invite Friends</h2>
     <div class="card">
-      <div class="icon">🎁</div>
-      <h3>Invite & Grow</h3>
-      <p>የግብዣ ሊንክህን ኮፒ አድርገህ ለጓደኞችህ አጋራ።</p>
-      <input id="inviteLink" readonly value="Telegram መለያ እየተገናኘ ነው">
-      <button class="btn primary full" onclick="copyInvite()">ሊንኩን ኮፒ አድርግ</button>
+      <p>የግብዣ ሊንክህን አጋራ።</p>
+      <input id="inviteLink" readonly>
+      <button class="btn primary full" onclick="copyInvite()">ሊንኩን Copy አድርግ</button>
       <p id="inviteMessage" class="notice"></p>
     </div>
-    <p class="notice">የግብዣ ሽልማት እስካሁን አልተነቃም። ለእውነተኛ ሽልማት የServer ማረጋገጫ ያስፈልጋል።</p>
+    <p class="notice">የግብዣ ሽልማት እስካሁን አልተነቃም።</p>
   </section>
 
+  <!-- WALLET -->
   <section id="wallet" class="page">
-    <h2 class="section-title">💰 Wallet</h2>
+    <h2>💰 Wallet</h2>
     <div class="hero">
-      <div class="label">ጠቅላላ የCoin ሂሳብ</div>
+      <div class="muted">የCoin ሂሳብ</div>
       <div class="balance"><span id="walletBalance">0</span> <small>TC</small></div>
-      <p>ይህ የሙከራ ሂሳብ ነው፤ የገንዘብ ዋጋ አይወክልም።</p>
+      <p>ይህ ሂሳብ በሙከራ ላይ ነው። TC እውነተኛ ገንዘብ አይደለም።</p>
     </div>
     <div class="card">
-      <h3>የገንዘብ ማውጣት</h3>
-      <p>የክፍያ ስርዓት ከመገናኘቱ በፊት የገንዘብ ማውጣት አይገኝም።</p>
+      <h3>Withdraw</h3>
+      <p>የገንዘብ ማውጣት ስርዓት ገና አልተገናኘም።</p>
       <button class="btn secondary full" onclick="alert('የክፍያ ስርዓቱ ገና አልተገናኘም።')">Withdraw — Soon</button>
     </div>
   </section>
 
+  <!-- PROFILE -->
   <section id="profile" class="page">
-    <h2 class="section-title">👤 Profile</h2>
+    <h2>👤 Profile</h2>
     <div class="card">
       <div class="icon">🧑‍💻</div>
-      <h3 id="profileName">TaskCoin User</h3>
-      <p>ወደ TaskCoin Ethiopia እንኳን በደህና መጣህ!</p>
-      <div class="profile-row">Platform: <strong>Telegram Mini App</strong></div>
-      <div class="profile-row">Account: <strong id="profileStatus">Demo</strong></div>
-      <div class="profile-row">Balance: <strong><span id="profileBalance">0</span> TC</strong></div>
-    </div>
-    <p class="notice">የመለያ መረጃና የሂሳብ ማስቀመጫ ከዚያ በኋላ ከFirebase ጋር ይገናኛሉ።</p>
-  </section>
-
-  <section id="auth" class="page">
-    <h2 class="section-title">🔐 Login / Register</h2>
-    <div class="card">
-      <p>የመለያ ስርዓት ከFirebase ጋር ከመገናኘቱ በፊት ይህ ገጽ የማሳያ ብቻ ነው።</p>
-      <label for="email">Email</label>
-      <input id="email" type="email" placeholder="your@email.com">
-      <label for="password">Password</label>
-      <input id="password" type="password" placeholder="ቢያንስ 6 ቁምፊ">
-      <button class="btn primary full" onclick="alert('Firebase Login/Register በሚቀጥለው ደረጃ እንገናኛለን።')">Continue</button>
+      <h3 id="profileName">User</h3>
+      <p id="profileEmail" class="muted"></p>
+      <p>TaskCoin Ethiopia Member</p>
+      <button class="btn secondary full" onclick="logout()">Logout</button>
     </div>
   </section>
-
-  <p class="notice">TaskCoin Ethiopia © 2026 · የሙከራ ሥሪት</p>
 </div>
 
-<nav class="nav">
+<nav id="nav" class="nav">
   <button class="active" data-page="home" onclick="showPage('home',this)"><span>🏠</span>Home</button>
   <button data-page="tasks" onclick="showPage('tasks',this)"><span>📋</span>Tasks</button>
   <button data-page="invite" onclick="showPage('invite',this)"><span>👥</span>Invite</button>
@@ -348,74 +153,14 @@
   <button data-page="profile" onclick="showPage('profile',this)"><span>👤</span>Profile</button>
 </nav>
 
-<script>
-  const tg = window.Telegram && window.Telegram.WebApp;
-  if (tg) {
-    tg.ready();
-    tg.expand();
-  }
-
-  function showPage(id, button) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    const page = document.getElementById(id);
-    if (page) page.classList.add('active');
-
-    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
-    const navButton = button || document.querySelector('.nav button[data-page="' + id + '"]');
-    if (navButton) navButton.classList.add('active');
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function demoTask() {
-    alert('ይህ የሙከራ Task ነው። እውነተኛ ሽልማት ገና አልተነቃም።');
-  }
-
-  async function copyInvite() {
-    const field = document.getElementById('inviteLink');
-    const message = document.getElementById('inviteMessage');
-    try {
-      await navigator.clipboard.writeText(field.value);
-      message.textContent = 'ሊንኩ ተኮፒ ተደርጓል።';
-    } catch (e) {
-      field.select();
-      message.textContent = 'ሊንኩን ምረጥና Copy አድርግ።';
-    }
-  }
-
-  function setTelegramProfile() {
-    if (!tg || !tg.initDataUnsafe || !tg.initDataUnsafe.user) return;
-
-    const user = tg.initDataUnsafe.user;
-    const name = [user.first_name, user.last_name].filter(Boolean).join(' ');
-    document.getElementById('profileName').textContent = name || 'TaskCoin User';
-    document.getElementById('profileStatus').textContent = 'Telegram connected';
-
-    if (user.username) {
-      const botUsername = 'taskcoin_ethiopia_bot';
-      const link = 'https://t.me/' + botUsername + '?start=' + user.id;
-      document.getElementById('inviteLink').value = link;
-    } else {
-      document.getElementById('inviteLink').value =
-        'https://t.me/taskcoin_ethiopia_bot/TaskCoinEthiopia';
-    }
-  }
-
-  setTelegramProfile();
-</script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut
+  getAuth, onAuthStateChanged, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
-  getFirestore,
-  doc,
-  setDoc,
-  serverTimestamp
+  getFirestore, doc, setDoc, getDoc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -431,43 +176,142 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+let mode = "login";
+let currentUser = null;
 
-window.taskCoinRegister = async function(name, email, password) {
+const $ = id => document.getElementById(id);
+
+window.switchAuth = function() {
+  mode = mode === "login" ? "register" : "login";
+  $("authTitle").textContent = mode === "login" ? "እንኳን ደህና መጣህ!" : "አዲስ መለያ ፍጠር";
+  $("authDescription").textContent = mode === "login" ? "በመለያህ ግባ።" : "መረጃህን ሙላና ተመዝገብ።";
+  $("nameWrap").classList.toggle("hidden", mode === "login");
+  $("submitBtn").textContent = mode === "login" ? "Login" : "Register";
+  $("switchBtn").textContent = mode === "login" ? "አካውንት የለህም? Register" : "አካውንት አለህ? Login";
+  $("password").autocomplete = mode === "login" ? "current-password" : "new-password";
+  $("authError").textContent = "";
+};
+
+window.submitAuth = async function() {
+  const email = $("email").value.trim();
+  const password = $("password").value;
+  const name = $("name").value.trim();
+  $("authError").textContent = "";
+
+  if (!email || !password) {
+    $("authError").textContent = "Email እና Password አስገባ።";
+    return;
+  }
+  if (password.length < 6) {
+    $("authError").textContent = "Password ቢያንስ 6 ቁምፊ መሆን አለበት።";
+    return;
+  }
+  if (mode === "register" && !name) {
+    $("authError").textContent = "ስምህን አስገባ።";
+    return;
+  }
+
+  $("submitBtn").disabled = true;
+  $("submitBtn").textContent = "ቆይ...";
   try {
-    const credential = await createUserWithEmailAndPassword(
-      auth, email, password
-    );
-
-    await setDoc(doc(db, "users", credential.user.uid), {
-      name: name,
-      email: email,
-      coins: 0,
-      createdAt: serverTimestamp()
-    });
-
-    alert("መለያህ ተፈጥሯል! እንኳን ደስ አለህ!");
-    return true;
+    if (mode === "register") {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await setDoc(doc(db, "users", result.user.uid), {
+        name, email, coins: 0, createdAt: serverTimestamp()
+      });
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+    }
   } catch (error) {
-    alert("ስህተት፦ " + error.message);
-    return false;
+    $("authError").textContent = friendlyError(error.code);
+  } finally {
+    $("submitBtn").disabled = false;
+    $("submitBtn").textContent = mode === "login" ? "Login" : "Register";
   }
 };
 
-window.taskCoinLogin = async function(email, password) {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("በተሳካ ሁኔታ ገብተሃል!");
-    return true;
-  } catch (error) {
-    alert("መግባት አልተሳካም፦ " + error.message);
-    return false;
-  }
+function friendlyError(code) {
+  const errors = {
+    "auth/email-already-in-use": "ይህ Email ቀድሞ ተጠቅሟል። Login ሞክር።",
+    "auth/invalid-email": "Email ትክክል አይደለም።",
+    "auth/weak-password": "ጠንካራ Password አስገባ።",
+    "auth/invalid-credential": "Email ወይም Password ትክክል አይደለም።",
+    "auth/network-request-failed": "Internet ግንኙነትህን አረጋግጥ።",
+    "permission-denied": "Firestore Rules ማስተካከል ያስፈልጋል።"
+  };
+  return errors[code] || ("ስህተት ተፈጥሯል። (" + code + ")");
+}
+
+window.showPage = function(id, button) {
+  if (!currentUser) return;
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  $(id).classList.add("active");
+  document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+  const navButton = button || document.querySelector('.nav button[data-page="' + id + '"]');
+  if (navButton) navButton.classList.add("active");
+  window.scrollTo({top: 0, behavior: "smooth"});
 };
 
-window.taskCoinLogout = async function() {
+window.logout = async function() {
   await signOut(auth);
-  alert("ከመለያህ ወጥተሃል።");
 };
+
+window.copyInvite = async function() {
+  const field = $("inviteLink");
+  try {
+    await navigator.clipboard.writeText(field.value);
+    $("inviteMessage").textContent = "ሊንኩ ተኮፒ ተደርጓል።";
+  } catch {
+    field.select();
+    $("inviteMessage").textContent = "ሊንኩን ምረጥና Copy አድርግ።";
+  }
+};
+
+onAuthStateChanged(auth, async user => {
+  currentUser = user;
+  if (!user) {
+    $("nav").style.display = "none";
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    $("auth").classList.add("active");
+    return;
+  }
+
+  let name = user.displayName || user.email.split("@")[0];
+  let coins = 0;
+  try {
+    const snap = await getDoc(doc(db, "users", user.uid));
+    if (snap.exists()) {
+      const data = snap.data();
+      name = data.name || name;
+      coins = Number(data.coins) || 0;
+    } else {
+      await setDoc(doc(db, "users", user.uid), {
+        name, email: user.email, coins: 0, createdAt: serverTimestamp()
+      });
+    }
+  } catch (error) {
+    console.error("Profile loading error:", error);
+  }
+
+  $("welcomeName").textContent = name;
+  $("profileName").textContent = name;
+  $("profileEmail").textContent = user.email || "";
+  $("balance").textContent = coins;
+  $("walletBalance").textContent = coins;
+  $("inviteLink").value = "https://t.me/taskcoin_ethiopia_bot/TaskCoinEthiopia";
+  $("nav").style.display = "grid";
+
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  $("home").classList.add("active");
+  document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+  document.querySelector('.nav button[data-page="home"]').classList.add("active");
+});
+
+const tg = window.Telegram?.WebApp;
+if (tg) {
+  tg.ready();
+  tg.expand();
+}
 </script>
 </body>
 </html>
