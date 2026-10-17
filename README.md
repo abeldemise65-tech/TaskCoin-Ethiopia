@@ -403,5 +403,71 @@
 
   setTelegramProfile();
 </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCMa8PltC1GF_fn8VWV2w8Un-7zzRzpZOc",
+  authDomain: "taskcoin-ethiopia.firebaseapp.com",
+  projectId: "taskcoin-ethiopia",
+  storageBucket: "taskcoin-ethiopia.firebasestorage.app",
+  messagingSenderId: "371761604216",
+  appId: "1:371761604216:web:18609aa65ec95f5800ef8d",
+  measurementId: "G-7133MYN4HV"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+window.taskCoinRegister = async function(name, email, password) {
+  try {
+    const credential = await createUserWithEmailAndPassword(
+      auth, email, password
+    );
+
+    await setDoc(doc(db, "users", credential.user.uid), {
+      name: name,
+      email: email,
+      coins: 0,
+      createdAt: serverTimestamp()
+    });
+
+    alert("መለያህ ተፈጥሯል! እንኳን ደስ አለህ!");
+    return true;
+  } catch (error) {
+    alert("ስህተት፦ " + error.message);
+    return false;
+  }
+};
+
+window.taskCoinLogin = async function(email, password) {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("በተሳካ ሁኔታ ገብተሃል!");
+    return true;
+  } catch (error) {
+    alert("መግባት አልተሳካም፦ " + error.message);
+    return false;
+  }
+};
+
+window.taskCoinLogout = async function() {
+  await signOut(auth);
+  alert("ከመለያህ ወጥተሃል።");
+};
+</script>
 </body>
 </html>
