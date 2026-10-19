@@ -403,5 +403,32 @@
 
   setTelegramProfile();
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDoc
+  } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCMa8PltC1GF_fn8VWV2w8Un-7zzRzpZOc",
+    authDomain: "taskcoin-ethiopia.firebaseapp.com",
+    projectId: "taskcoin-ethiopia",
+    storageBucket: "taskcoin-ethiopia.firebasestorage.app",
+    messagingSenderId: "371761604216",
+    appId: "1:371761604216:web:18609aa65ec95f5800ef8d",
+    measurementId: "G-7133MYN4HV"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Make Firebase available to other functions in this page
+  window.taskCoinFirebase = { app, db, doc, setDoc, getDoc };
+
+  console.log("TaskCoin Ethiopia Firebase initialized!");
+</script>
 </body>
 </html>
