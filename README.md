@@ -1,407 +1,322 @@
+   
 <!DOCTYPE html>
-<html lang="am">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080d0a">
-  <title>TaskCoin Ethiopia</title>
-
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-  <style>
-    :root {
-      --bg: #080d0a;
-      --card: #121a14;
-      --green: #00d995;
-      --text: #f5f7f2;
-      --muted: #9aaa9c;
-      --border: #27342a;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, sans-serif;
-    }
-
-    button, input { font: inherit; }
-
-    button {
-      cursor: pointer;
-      border: 0;
-      border-radius: 12px;
-      padding: 14px;
-      font-weight: bold;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      margin: 8px 0 14px;
-      color: white;
-      background: #080d0a;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-
-    .wrap {
-      width: min(100%, 520px);
-      margin: auto;
-      padding: 20px 16px 100px;
-    }
-
-    header {
-      text-align: center;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    header h1 {
-      color: var(--green);
-      font-size: 25px;
-      margin: 0;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
-      margin-top: 18px;
-    }
-
-    h2 { font-size: 21px; }
-    .muted { color: var(--muted); line-height: 1.6; }
-    .green { color: var(--green); }
-
-    .primary {
-      width: 100%;
-      color: #00170e;
-      background: var(--green);
-      margin-top: 8px;
-    }
-
-    .secondary {
-      width: 100%;
-      color: var(--text);
-      background: #26352b;
-      margin-top: 8px;
-    }
-
-    .hidden { display: none !important; }
-
-    .tabs {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-around;
-      gap: 4px;
-      padding: 10px 3px;
-      background: #101711;
-      border-top: 1px solid var(--border);
-      z-index: 5;
-    }
-
-    .tabs button {
-      flex: 1;
-      padding: 10px 2px;
-      color: var(--muted);
-      background: transparent;
-      font-size: 12px;
-    }
-
-    .tabs button.active { color: var(--green); }
-
-    .task {
-      padding: 15px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .notice {
-      font-size: 13px;
-      color: #f3c66b;
-      line-height: 1.6;
-      margin-top: 12px;
-    }
-
-    #message {
-      margin-top: 12px;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-    }
-
-    .stat {
-      font-size: 30px;
-      font-weight: bold;
-      color: var(--green);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TaskCoin Ethiopia</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{color-scheme:dark;--bg:#080b0a;--card:#121916;--green:#20d98b;--muted:#9aaba3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif;padding:18px 15px 90px}
+header{display:flex;align-items:center;gap:12px;margin:8px 0 22px}
+.logo{width:48px;height:48px;border-radius:15px;background:var(--green);color:#06150e;display:grid;place-items:center;font-weight:900;font-size:23px}
+h1{font-size:21px;margin:0}h2{font-size:19px;margin:22px 0 12px}
+p{color:var(--muted);font-size:14px;line-height:1.5}
+.card{background:var(--card);border:1px solid #26332d;border-radius:17px;padding:16px;margin:12px 0}
+.balance{background:linear-gradient(130deg,#123e2b,#10221a);border:1px solid #206844}
+.balance strong{font-size:32px;color:var(--green);display:block;margin:10px 0}
+button,.btn{border:0;border-radius:11px;padding:12px 14px;background:var(--green);color:#04160d;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.5}
+input,textarea{width:100%;padding:12px;margin:7px 0 12px;border:1px solid #34443b;border-radius:10px;background:#090e0b;color:white}
+nav{position:fixed;bottom:0;left:0;right:0;background:#101612;border-top:1px solid #29342d;display:flex;justify-content:space-around;padding:10px 2px calc(10px + env(safe-area-inset-bottom));z-index:5}
+nav button{background:transparent;color:#b8c7be;padding:8px 5px;font-size:11px}
+nav button.active{color:var(--green)}
+.page{display:none}.page.active{display:block}
+.small{font-size:12px;color:var(--muted)}
+.task-title{font-weight:bold;font-size:16px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+button.secondary{background:#25342b;color:#fff}
+.notice{padding:12px;border-radius:10px;background:#17241c;color:#c8f6dc;font-size:13px}
+a{color:var(--green)}
+.hidden{display:none!important}
+</style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
-      <h1>🪙 TaskCoin Ethiopia</h1>
-      <p class="muted">Tasks • Coins • Rewards</p>
-    </header>
+<header>
+  <div class="logo">T</div>
+  <div><h1>TaskCoin Ethiopia</h1><p style="margin:5px 0">Tasks • Coins • Rewards</p></div>
+</header>
 
-    <section id="auth">
-      <div class="card">
-        <h2 id="authTitle">አዲስ መለያ ፍጠር</h2>
-        <p class="muted">
-          በኢሜይልህ ተመዝገብ ወይም ወደ መለያህ ግባ።
-        </p>
+<section id="auth" class="card">
+  <h2 id="authTitle">Welcome back</h2>
+  <p>Sign in or create your account.</p>
+  <input id="email" type="email" placeholder="Email address" autocomplete="email">
+  <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+  <button id="authBtn" style="width:100%">Login</button>
+  <button id="switchAuth" class="secondary" style="width:100%;margin-top:9px">Create account</button>
+  <p id="authMsg" role="status"></p>
+</section>
 
-        <form id="authForm">
-          <label for="email">ኢሜይል</label>
-          <input id="email" type="email"
-                 placeholder="name@example.com"
-                 autocomplete="email" required>
+<main id="app" class="hidden">
+  <section id="home" class="page active">
+    <div class="card balance">
+      <p>Total Points</p><strong id="homeCoins">0</strong>
+      <span class="small">Your approved TaskCoin rewards</span>
+    </div>
+    <div class="card"><div class="row"><span>Available tasks</span><strong>3</strong></div>
+      <p>Complete a task and submit evidence for review.</p>
+      <button onclick="showPage('tasks')">Explore Tasks</button>
+    </div>
+    <div class="card"><h3>How it works</h3>
+      <p>1. Choose a task.<br>2. Complete it and submit proof.<br>3. Wait for an admin to review it.<br>4. Approved rewards are added to your balance.</p>
+    </div>
+  </section>
 
-          <label for="password">የይለፍ ቃል</label>
-          <input id="password" type="password"
-                 placeholder="ቢያንስ 6 ቁምፊዎች"
-                 minlength="6"
-                 autocomplete="current-password" required>
+  <section id="tasks" class="page">
+    <h2>Available Tasks</h2>
+    <p>Follow the public account and submit your proof. Do not submit the same task twice.</p>
+    <div id="taskList"></div>
+  </section>
 
-          <button class="primary" id="submitAuth" type="submit">
-            ተመዝገብ
-          </button>
-        </form>
+  <section id="wallet" class="page">
+    <h2>My Wallet</h2>
+    <div class="card balance"><p>Total Points</p><strong id="walletCoins">0</strong></div>
+    <div class="notice">Only rewards approved by an authorized admin should appear here.</div>
+    <p>Withdrawals are not enabled in this version.</p>
+  </section>
 
-        <button class="secondary" id="toggleAuth" type="button">
-          መለያ አለኝ — ግባ
-        </button>
+  <section id="invite" class="page">
+    <h2>Invite Friends</h2>
+    <div class="card"><p>Share TaskCoin Ethiopia with your friends.</p>
+    <button id="shareBtn">Share App</button></div>
+  </section>
 
-        <div id="message" role="status"></div>
-      </div>
-    </section>
+  <section id="profile" class="page">
+    <h2>My Profile</h2>
+    <div class="card"><p>Email</p><strong id="profileEmail"></strong>
+    <p>Account ID</p><span id="profileId" class="small"></span>
+    <button id="logoutBtn" class="secondary" style="width:100%;margin-top:16px">Logout</button></div>
+  </section>
 
-    <main id="app" class="hidden">
-      <section id="homePage" class="page">
-        <div class="card">
-          <p class="muted">እንኳን ደህና መጣህ!</p>
-          <h2 id="welcome">TaskCoin Ethiopia</h2>
-          <p class="muted">የመለያህ ኢሜይል፦</p>
-          <p id="userEmail"></p>
-        </div>
+  <section id="admin" class="page">
+    <h2>Admin Review</h2>
+    <div class="notice">Authorized admin accounts only.</div>
+    <div id="adminList"><p>No submissions loaded.</p></div>
+  </section>
+</main>
 
-        <div class="card">
-          <p class="muted">የCoins ሂሳብ</p>
-          <div class="stat">0 Coins</div>
-          <p class="notice">
-            ይህ የመጀመሪያ ስሪት ነው። እውነተኛ ሽልማቶች
-            እስካሁን አልተነቃቁም።
-          </p>
-        </div>
+<nav id="nav" class="hidden">
+  <button class="active" data-page="home">🏠<br>Home</button>
+  <button data-page="tasks">📋<br>Tasks</button>
+  <button data-page="wallet">💰<br>Wallet</button>
+  <button data-page="invite">👥<br>Invite</button>
+  <button data-page="profile">👤<br>Profile</button>
+  <button id="adminNav" class="hidden" data-page="admin">🛡️<br>Admin</button>
+</nav>
 
-        <div class="card">
-          <h2>📋 የTasks ክፍል</h2>
-          <p class="muted">
-            የሚገኙ Tasks እና የሽልማት ስርዓት በቀጣይ
-            ይጨመራሉ።
-          </p>
-        </div>
-      </section>
+<script type="module">
+import {initializeApp} from
+'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,
+signInWithEmailAndPassword,signOut} from
+'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import {getFirestore,doc,getDoc,setDoc,collection,addDoc,
+query,where,getDocs,runTransaction,serverTimestamp}
+from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
-      <section id="tasksPage" class="page hidden">
-        <div class="card">
-          <h2>📋 Tasks</h2>
-          <div class="task">
-            <strong>Tasks በቅርቡ ይጀምራሉ</strong>
-            <p class="muted">
-              ሽልማት የሚያገኙ ተግባራት እና ማረጋገጫቸው
-              እየተዘጋጁ ነው።
-            </p>
-          </div>
-        </div>
-      </section>
+const firebaseConfig = {
+  apiKey: "AIzaSyCMa8PltC1GF_fn8VWV2w8Un-7zzRzpZOc",
+  authDomain: "taskcoin-ethiopia.firebaseapp.com",
+  projectId: "taskcoin-ethiopia",
+  storageBucket: "taskcoin-ethiopia.firebasestorage.app",
+  messagingSenderId: "371761604216",
+  appId: "1:371761604216:web:18609aa65ec95f5800ef8d",
+  measurementId: "G-7133MYN4HV"
+};
 
-      <section id="invitePage" class="page hidden">
-        <div class="card">
-          <h2>👥 ጓደኞችን ጋብዝ</h2>
-          <p class="muted">
-            የግብዣ ሊንክና የInvite ሽልማት ስርዓት
-            በቀጣይ ይጨመራሉ።
-          </p>
-        </div>
-      </section>
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const tg = window.Telegram?.WebApp;
+tg?.ready();
+tg?.expand();
 
-      <section id="walletPage" class="page hidden">
-        <div class="card">
-          <h2>👛 Wallet</h2>
-          <p class="muted">የCoins ሂሳብ፦ 0</p>
-          <p class="notice">
-            ገንዘብ ማውጣት ገና አልተነቃም።
-            እውነተኛ ክፍያ እስካሁን አይፈጸምም።
-          </p>
-        </div>
-      </section>
+const tasks = [
+ {id:'follow_herfinsta',name:'Follow herfinsta_2',
+  url:'https://www.tiktok.com/@herfinsta_2',coins:10},
+ {id:'follow_taskcoin',name:'Follow taskcoinethiopia',
+  url:'https://www.tiktok.com/@taskcoinethiopia',coins:10},
+ {id:'follow_vynaro',name:'Follow vynarostudio',
+  url:'https://www.tiktok.com/@vynarostudio',coins:10}
+];
 
-      <section id="profilePage" class="page hidden">
-        <div class="card">
-          <h2>👤 Profile</h2>
-          <p class="muted">ኢሜይል፦</p>
-          <p id="profileEmail"></p>
-          <button class="secondary" id="logout" type="button">
-            ውጣ
-          </button>
-        </div>
-      </section>
-    </main>
-  </div>
+let registerMode=false;
+let currentUser=null;
+let isAdmin=false;
+const $=id=>document.getElementById(id);
+const msg=(id,text)=>$(id).textContent=text;
 
-  <nav id="tabs" class="tabs hidden">
-    <button class="active" data-page="homePage">🏠<br>ቤት</button>
-    <button data-page="tasksPage">📋<br>Tasks</button>
-    <button data-page="invitePage">👥<br>Invite</button>
-    <button data-page="walletPage">👛<br>Wallet</button>
-    <button data-page="profilePage">👤<br>Profile</button>
-  </nav>
+$('switchAuth').onclick=()=>{
+ registerMode=!registerMode;
+ $('authTitle').textContent=registerMode?'Create account':'Welcome back';
+ $('authBtn').textContent=registerMode?'Register':'Login';
+ $('switchAuth').textContent=registerMode?'Back to login':'Create account';
+ msg('authMsg','');
+};
 
-  <script type="module">
-    import { initializeApp }
-      from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+$('authBtn').onclick=async()=>{
+ const email=$('email').value.trim();
+ const password=$('password').value;
+ if(!email||password.length<6){
+  msg('authMsg','Enter an email and a password of at least 6 characters.');
+  return;
+ }
+ $('authBtn').disabled=true;
+ try{
+  if(registerMode){
+   const result=await createUserWithEmailAndPassword(auth,email,password);
+   await setDoc(doc(db,'users',result.user.uid),{
+    email,coins:0,createdAt:serverTimestamp()
+   });
+  }else{
+   await signInWithEmailAndPassword(auth,email,password);
+  }
+ }catch(e){msg('authMsg',e.message);}
+ finally{$('authBtn').disabled=false;}
+};
 
-    import {
-      getAuth,
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      onAuthStateChanged,
-      signOut
-    } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+function showPage(page){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ $(page)?.classList.add('active');
+ document.querySelectorAll('nav [data-page]').forEach(b=>
+  b.classList.toggle('active',b.dataset.page===page));
+ if(page==='tasks')loadTasks();
+ if(page==='admin'&&isAdmin)loadAdmin();
+}
+window.showPage=showPage;
+document.querySelectorAll('nav [data-page]').forEach(b=>
+ b.onclick=()=>showPage(b.dataset.page));
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCMa8PltC1GF_fn8VWV2w8Un-7zzRzpZOc",
-      authDomain: "taskcoin-ethiopia.firebaseapp.com",
-      projectId: "taskcoin-ethiopia",
-      storageBucket: "taskcoin-ethiopia.firebasestorage.app",
-      messagingSenderId: "371761604216",
-      appId: "1:371761604216:web:18609aa65ec95f5800ef8d",
-      measurementId: "G-7133MYN4HV"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    const $ = (id) => document.getElementById(id);
-
-    let isRegister = true;
-
-    function showMessage(text, error = false) {
-      $("message").textContent = text;
-      $("message").style.color = error ? "#ff8b8b" : "#00d995";
-    }
-
-    function firebaseError(error) {
-      const messages = {
-        "auth/email-already-in-use": "ይህ ኢሜይል ቀድሞ ተመዝግቧል። ግባ።",
-        "auth/invalid-email": "ኢሜይሉ ትክክል አይደለም።",
-        "auth/weak-password": "የይለፍ ቃሉን አጠናክር።",
-        "auth/invalid-credential": "ኢሜይሉ ወይም የይለፍ ቃሉ ትክክል አይደለም።",
-        "auth/network-request-failed": "ኢንተርኔትህን አረጋግጥ።",
-        "auth/too-many-requests": "ብዙ ሙከራዎች ተደርገዋል። ቆይተህ ሞክር።",
-        "auth/operation-not-allowed": "በFirebase ውስጥ Email/Password አልተነቃም።"
-      };
-
-      return messages[error.code] ||
-        "ስህተት ተፈጥሯል። ኢንተርኔትህንና Firebase ቅንብርህን አረጋግጥ።";
-    }
-
-    $("toggleAuth").addEventListener("click", () => {
-      isRegister = !isRegister;
-
-      $("authTitle").textContent = isRegister
-        ? "አዲስ መለያ ፍጠር"
-        : "ወደ መለያህ ግባ";
-
-      $("submitAuth").textContent = isRegister
-        ? "ተመዝገብ"
-        : "ግባ";
-
-      $("toggleAuth").textContent = isRegister
-        ? "መለያ አለኝ — ግባ"
-        : "አዲስ ነኝ — ተመዝገብ";
-
-      $("password").autocomplete = isRegister
-        ? "new-password"
-        : "current-password";
-
-      showMessage("");
+async function loadTasks(){
+ const box=$('taskList');box.replaceChildren();
+ for(const t of tasks){
+  const card=document.createElement('div');card.className='card';
+  const title=document.createElement('div');title.className='task-title';
+  title.textContent=t.name;
+  const reward=document.createElement('p');reward.textContent=`Reward: ${t.coins} coins after approval`;
+  const link=document.createElement('a');link.href=t.url;link.target='_blank';
+  link.rel='noopener noreferrer';link.textContent='Open TikTok account';
+  const proof=document.createElement('textarea');
+  proof.placeholder='Paste your public proof link or describe the evidence';
+  proof.maxLength=1000;
+  const button=document.createElement('button');button.textContent='Submit for review';
+  const status=document.createElement('p');status.className='small';
+  try{
+   const old=await getDoc(doc(db,'submissions',`${currentUser.uid}_${t.id}`));
+   if(old.exists()){
+    status.textContent='Status: '+(old.data().status||'submitted');
+    proof.disabled=true;button.disabled=true;
+   }
+  }catch(e){status.textContent='Submission status unavailable.';}
+  button.onclick=async()=>{
+   const value=proof.value.trim();
+   if(value.length<5){status.textContent='Add your proof before submitting.';return;}
+   button.disabled=true;
+   try{
+    const ref=doc(db,'submissions',`${currentUser.uid}_${t.id}`);
+    await runTransaction(db,async tx=>{
+     const old=await tx.get(ref);
+     if(old.exists())throw Error('This task has already been submitted.');
+     tx.set(ref,{
+      uid:currentUser.uid,taskId:t.id,taskName:t.name,
+      reward:t.coins,proof:value,status:'pending',
+      createdAt:serverTimestamp()
+     });
     });
+    status.textContent='Submitted. Waiting for admin review.';
+    proof.disabled=true;
+   }catch(e){status.textContent=e.message;button.disabled=false;}
+  };
+  card.append(title,reward,link,proof,button,status);
+  box.append(card);
+ }
+}
 
-    $("authForm").addEventListener("submit", async (event) => {
-      event.preventDefault();
+async function refreshBalance(){
+ const snap=await getDoc(doc(db,'users',currentUser.uid));
+ const coins=snap.exists()?Number(snap.data().coins||0):0;
+ $('homeCoins').textContent=coins;
+ $('walletCoins').textContent=coins;
+}
 
-      const email = $("email").value.trim();
-      const password = $("password").value;
+async function loadAdmin(){
+ const box=$('adminList');box.replaceChildren();
+ try{
+  const result=await getDocs(query(collection(db,'submissions'),
+   where('status','==','pending')));
+  if(result.empty){box.textContent='No pending submissions.';return;}
+  result.forEach(snap=>{
+   const d=snap.data(),card=document.createElement('div');card.className='card';
+   const title=document.createElement('strong');title.textContent=d.taskName||d.taskId;
+   const details=document.createElement('p');
+   details.textContent=`User: ${d.uid} • Reward: ${d.reward} coins`;
+   const proof=document.createElement('p');proof.textContent='Proof: '+d.proof;
+   const approve=document.createElement('button');approve.textContent='Approve';
+   const reject=document.createElement('button');reject.textContent='Reject';
+   reject.className='secondary';
+   const status=document.createElement('p');
+   approve.onclick=()=>review(snap.ref,d,true,status,approve,reject);
+   reject.onclick=()=>review(snap.ref,d,false,status,approve,reject);
+   card.append(title,details,proof,approve,reject,status);box.append(card);
+  });
+ }catch(e){box.textContent='Cannot load reviews: '+e.message;}
+}
 
-      $("submitAuth").disabled = true;
-      $("submitAuth").textContent = "ቆይ...";
+async function review(ref,data,approved,status,approve,reject){
+ approve.disabled=true;reject.disabled=true;
+ try{
+  await runTransaction(db,async tx=>{
+   const sub=await tx.get(ref);
+   if(!sub.exists()||sub.data().status!=='pending')
+    throw Error('This submission has already been reviewed.');
+   if(approved){
+    const userRef=doc(db,'users',data.uid);
+    const user=await tx.get(userRef);
+    if(!user.exists())throw Error('User profile not found.');
+    tx.update(userRef,{coins:Number(user.data().coins||0)+Number(data.reward||0)});
+   }
+   tx.update(ref,{status:approved?'approved':'rejected',
+    reviewedBy:currentUser.uid,reviewedAt:serverTimestamp()});
+  });
+  status.textContent=approved?'Approved.':'Rejected.';
+  await refreshBalance();await loadAdmin();
+ }catch(e){
+  status.textContent=e.message;approve.disabled=false;reject.disabled=false;
+ }
+}
 
-      try {
-        if (isRegister) {
-          await createUserWithEmailAndPassword(auth, email, password);
-        } else {
-          await signInWithEmailAndPassword(auth, email, password);
-        }
-      } catch (error) {
-        showMessage(firebaseError(error), true);
-      } finally {
-        $("submitAuth").disabled = false;
-        $("submitAuth").textContent = isRegister ? "ተመዝገብ" : "ግባ";
-      }
-    });
+$('logoutBtn').onclick=()=>signOut(auth);
+$('shareBtn').onclick=()=>{
+ const url='https://t.me/taskcoin_ethiopia_bot/TaskCoinEthiopia';
+ if(tg?.openTelegramLink)tg.openTelegramLink(
+  'https://t.me/share/url?url='+encodeURIComponent(url));
+ else if(navigator.share)navigator.share({title:'TaskCoin Ethiopia',url});
+ else alert(url);
+};
 
-    onAuthStateChanged(auth, (user) => {
-      const loggedIn = Boolean(user);
-
-      $("auth").classList.toggle("hidden", loggedIn);
-      $("app").classList.toggle("hidden", !loggedIn);
-      $("tabs").classList.toggle("hidden", !loggedIn);
-
-      if (user) {
-        $("welcome").textContent = "እንኳን ደህና መጣህ!";
-        $("userEmail").textContent = user.email || "";
-        $("profileEmail").textContent = user.email || "";
-      } else {
-        showMessage("");
-      }
-    });
-
-    $("logout").addEventListener("click", async () => {
-      try {
-        await signOut(auth);
-      } catch (error) {
-        alert(firebaseError(error));
-      }
-    });
-
-    document.querySelectorAll(".tabs button").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".page").forEach((page) => {
-          page.classList.add("hidden");
-        });
-
-        $(button.dataset.page).classList.remove("hidden");
-
-        document.querySelectorAll(".tabs button").forEach((tab) => {
-          tab.classList.remove("active");
-        });
-
-        button.classList.add("active");
-      });
-    });
-
-    if (window.Telegram?.WebApp) {
-      window.Telegram.WebApp.ready();
-      window.Telegram.WebApp.expand();
-    }
-  </script>
+onAuthStateChanged(auth,async user=>{
+ currentUser=user;
+ $('auth').classList.toggle('hidden',!!user);
+ $('app').classList.toggle('hidden',!user);
+ $('nav').classList.toggle('hidden',!user);
+ if(!user){isAdmin=false;return;}
+ $('profileEmail').textContent=user.email||'';
+ $('profileId').textContent=user.uid;
+ try{
+  const profile=await getDoc(doc(db,'users',user.uid));
+  if(!profile.exists())await setDoc(doc(db,'users',user.uid),{
+   email:user.email||'',coins:0,createdAt:serverTimestamp()
+  });
+  const admin=await getDoc(doc(db,'admins',user.uid));
+  isAdmin=admin.exists()&&admin.data().enabled===true;
+  $('adminNav').classList.toggle('hidden',!isAdmin);
+  await refreshBalance();
+  showPage('home');
+ }catch(e){alert('Firebase setup or permissions need attention: '+e.message);}
+});
+</script>
 </body>
 </html>
+     
